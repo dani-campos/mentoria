@@ -17,7 +17,8 @@ public class Office {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "officeTo")
     private List<OccupationHistory> occupationHistoriesTo;
 
-    public Office(String officeName, String description) {
+    public Office(Integer id, String officeName, String description) {
+        this.id = id;
         this.officeName = officeName;
         this.description = description;
     }

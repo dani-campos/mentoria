@@ -2,9 +2,9 @@ package br.com.dani.mentoria_pp.service;
 
 import br.com.dani.mentoria_pp.dto.EmployeeDto;
 import br.com.dani.mentoria_pp.error.exception.EmployeeNotFoundException;
-import br.com.dani.mentoria_pp.model.Employee;
-import br.com.dani.mentoria_pp.model.OccupationHistory;
-import br.com.dani.mentoria_pp.model.SalaryHistory;
+import br.com.dani.mentoria_pp.error.exception.OfficeNotFoundException;
+import br.com.dani.mentoria_pp.error.exception.UserNotFoundException;
+import br.com.dani.mentoria_pp.model.*;
 import br.com.dani.mentoria_pp.repository.EmployeeRepository;
 import br.com.dani.mentoria_pp.repository.OfficeRepository;
 import br.com.dani.mentoria_pp.repository.UserRepository;
@@ -42,8 +42,8 @@ public class EmployeeService {
 
     public void createEmployee(EmployeeDto employeeDto) {
 
-        var officeEntity = officeRepository.findById(employeeDto.getOfficeId()).get();
-        var userEntity = userRepository.findById(employeeDto.getUserId()).get();
+        var officeEntity = getOfficeEntity(employeeDto.getOfficeId());
+        var userEntity = getUserEntity(employeeDto.getUserId());
 
         var salaryHistories = Arrays.asList(new SalaryHistory(
                 null,
@@ -110,6 +110,26 @@ public class EmployeeService {
         }
 
         return file;
+    }
+
+    private Office getOfficeEntity(Integer officeId) {
+
+        var office = officeRepository.findById(officeId);
+        if (office.isEmpty()) {
+            throw new OfficeNotFoundException("Office not found.");
+        }
+
+        return office.get();
+
+    }
+
+    private User getUserEntity(Integer userId) {
+        var user = userRepository.findById(userId);
+        if (user.isEmpty()) {
+            throw new UserNotFoundException("User not found.");
+        }
+
+        return user.get();
     }
 
 

@@ -17,7 +17,8 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<OccupationHistory> occupationHistories;
 
-    public User(String email, String password) {
+    public User(Integer id, String email, String password) {
+        this.id = id;
         this.email = email;
         this.password = password;
     }

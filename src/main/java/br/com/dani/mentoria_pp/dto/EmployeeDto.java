@@ -13,6 +13,20 @@ public class EmployeeDto {
     private Integer officeId;
     private Integer userId;
 
+    public EmployeeDto(String fullName, LocalDate birthDate, String address, String document, String photo, Integer salary, Integer officeId, Integer userId) {
+        this.fullName = fullName;
+        this.birthDate = birthDate;
+        this.address = address;
+        this.document = document;
+        this.photo = photo;
+        this.salary = salary;
+        this.officeId = officeId;
+        this.userId = userId;
+    }
+
+    public EmployeeDto() {
+    }
+
     public String getFullName() {
         return fullName;
     }

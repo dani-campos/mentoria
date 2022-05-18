@@ -15,6 +15,7 @@ public class OfficeService {
 
     public void createOffice(OfficeDto officeDto){
         var officeEntity = new Office(
+                null,
                 officeDto.getDescription(),
                 officeDto.getOfficeName()
         );

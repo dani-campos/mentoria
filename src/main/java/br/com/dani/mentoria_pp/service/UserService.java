@@ -16,6 +16,7 @@ public class UserService {
 
     public void createUser(UserDto userDto) {
         var userEntity = new User(
+                null,
                 userDto.getEmail(),
                 userDto.getPassword()
         );
